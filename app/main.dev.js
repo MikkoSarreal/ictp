@@ -15,6 +15,8 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 
+const { ipcMain } = require('electron');
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -50,6 +52,10 @@ const installExtensions = async () => {
 /**
  * Add event listeners...
  */
+
+ipcMain.on('quit', async () => {
+  app.quit();
+});
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even

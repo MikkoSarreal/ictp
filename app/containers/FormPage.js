@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import Form from '../components/form';
+import Form from '../components/Form';
 
 export default class FormPage extends Component {
   render() {
