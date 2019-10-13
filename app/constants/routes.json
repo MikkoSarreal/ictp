@@ -1,5 +1,6 @@
 {
   "HOME": "/",
   "COUNTER": "/counter",
-  "FORM": "/form"
+  "FORM": "/form",
+  "FORMCREATE": "/form/create"
 }
