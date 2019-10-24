@@ -1,9 +1,9 @@
-// @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../../constants/routes';
 
-import { Form, Row, Col, Input, Button, Icon } from 'antd';
+import { Form, Input, Button, Icon } from 'antd';
+import NewCalculationModal from '../../fragments/NewCalculationModal';
 
 import './FormCreate.css';
 
@@ -11,10 +11,26 @@ class FormCreate extends Component {
   constructor() {
     super();
 
-    this.addComputation = this.addComputation.bind(this);
+    this.addCalculation = this.addCalculation.bind(this);
+    this.handleCalculationAdded = this.handleCalculationAdded.bind(this);
   }
 
-  addComputation() {}
+  addCalculation() {
+    this.calculationModal.showModal();
+  }
+
+  handleCalculationAdded() {
+    const { form } = this.calculationModal.props;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+
+      console.log('Received values of form: ', values);
+      form.resetFields();
+      this.calculationModal.closeModal();
+    });
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -41,13 +57,17 @@ class FormCreate extends Component {
           <Form.Item {...formItemLayoutWithOutLabel}>
             <Button
               type="dashed"
-              onClick={this.addComputation}
+              onClick={this.addCalculation}
               style={{ minWidth: '100px' }}
             >
-              <Icon type="plus" /> Add Computation
+              <Icon type="plus" /> Add Calculation
             </Button>
           </Form.Item>
         </Form>
+        <NewCalculationModal
+          wrappedComponentRef={c => (this.calculationModal = c)}
+          onCreate={this.handleCalculationAdded}
+        />
       </div>
     );
   }
