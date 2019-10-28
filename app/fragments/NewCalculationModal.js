@@ -44,12 +44,22 @@ class NewCalculationModal extends React.Component {
         onCancel={this.handleCancel}
       >
         <Form layout="vertical">
-          <Form.Item label="Title">
-            {getFieldDecorator('title', {
+          <Form.Item label="First Element label:">
+            {getFieldDecorator('label1', {
               rules: [
                 {
                   required: true,
-                  message: 'Please input the title of the calculation'
+                  message: 'Please input the first element label'
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label="Second Element label:">
+            {getFieldDecorator('label2', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input the second element label'
                 }
               ]
             })(<Input />)}
